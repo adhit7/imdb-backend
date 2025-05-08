@@ -23,27 +23,28 @@ const movieValidationSchema = Joi.object({
     'any.required': 'Poster URL is required',
   }),
   producer: Joi.string()
+    .pattern(/^[0-9a-fA-F]{24}$/, 'Producer ID must be a valid Mongo ObjectId')
     .required()
-    .pattern(/^[0-9a-fA-F]{24}$/, 'Producer ID must be a valid ObjectId')
     .messages({
       'string.base': 'Producer ID must be a string',
-      'string.pattern.base': 'Producer ID must be a valid ObjectId',
+      'string.pattern.base': 'Producer ID must be a valid Mongo ObjectId',
       'any.required': 'Producer ID is required',
     }),
   actors: Joi.array()
     .items(
-      Joi.string().pattern(
-        /^[0-9a-fA-F]{24}$/,
-        'Actor ID must be a valid ObjectId'
-      )
+      Joi.string()
+        .pattern(/^[0-9a-fA-F]{24}$/, 'Actor ID must be a valid Mongo ObjectId')
+        .messages({
+          'string.base': 'Each actor ID must be a string',
+          'string.pattern.base': 'Actor ID must be a valid Mongo ObjectId',
+        })
     )
     .min(1)
     .required()
     .messages({
-      'array.base': 'Actors must be an array of string IDs',
+      'array.base': 'Actors must be an array of strings',
       'array.min': 'At least one actor is required',
       'any.required': 'Actors are required',
-      'string.pattern.base': 'Actor IDs must be valid ObjectIds',
     }),
 });
 

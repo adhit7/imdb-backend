@@ -15,7 +15,7 @@ const movieSchema = mongoose.Schema(
       required: true,
     },
     poster: {
-      type: Boolean,
+      type: String,
       required: true,
     },
     producer: {

@@ -1,6 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Actor from '../models/Actor.js';
-import { actorValidationSchema } from '../validation/actorValidation.js'; // import validation schema
+import { actorValidationSchema } from '../validations/actorValidation.js'; // import validation schema
 
 // @desc    Add new actor
 // @route   POST /actors

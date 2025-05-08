@@ -1,6 +1,8 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Movie from '../models/Movie.js';
-import { movieValidationSchema } from '../validation/movieValidation.js';
+import Producer from '../models/Producer.js';
+import Actor from '../models/Actor.js';
+import { movieValidationSchema } from '../validations/movieValidation.js';
 
 // @desc    Add new movie
 // @route   POST movie/add
@@ -24,6 +26,20 @@ const addMovie = asyncHandler(async (req, res) => {
     throw new Error('Movie already exists with same name, year and producer');
   }
 
+  // Check if producer exists in DB
+  const existingProducer = await Producer.findById(producer);
+  if (!existingProducer) {
+    res.status(400);
+    throw new Error('Producer not found');
+  }
+
+  // Check if all actors exist in DB
+  const existingActors = await Actor.find({ _id: { $in: actors } });
+  if (existingActors.length !== actors.length) {
+    res.status(400);
+    throw new Error('One or more actor IDs are invalid');
+  }
+
   const movie = await Movie.create({
     name,
     yearOfRelease,
@@ -37,6 +53,9 @@ const addMovie = asyncHandler(async (req, res) => {
     res.json({
       _id: movie._id,
       name: movie.name,
+      yearOfRelease: movie.yearOfRelease,
+      plot: movie.plot,
+      poster: movie.poster,
     });
   } else {
     res.status(404);
@@ -49,11 +68,12 @@ const addMovie = asyncHandler(async (req, res) => {
 // @access  Private
 const updateMovie = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  console.log('44', id);
   const { name, yearOfRelease, plot, poster, producer, actors } = req.body;
 
   // Validate incoming data using Joi
   const { error } = movieValidationSchema.validate(req.body, {
-    abortEarly: false,
+    abortEarly: false, // Validate all errors at once
   });
   if (error) {
     res.status(400);
@@ -67,7 +87,7 @@ const updateMovie = asyncHandler(async (req, res) => {
     throw new Error('Movie not found');
   }
 
-  // Update the movie
+  // Update the movie using findByIdAndUpdate
   movie = await Movie.findByIdAndUpdate(
     id,
     { name, yearOfRelease, plot, poster, producer, actors },

@@ -1,18 +1,21 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import User from '../models/User.js';
 import generateToken from '../utils/generateToken.js';
-import { userValidationSchema } from '../validation/userValidation.js';
+import { userValidationSchema } from '../validations/userValidation.js';
 
 // @desc    Login
-// @route   POST /user/auth
+// @route   POST /user/login
 // @access  Public
-const authUser = asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   // Validate incoming data
-  const { error } = userValidationSchema.validate(req.body, {
-    abortEarly: false,
-  });
+  const loginSchema = userValidationSchema.fork(['name'], (schema) =>
+    schema.optional()
+  );
+
+  const { error } = loginSchema.validate(req.body, { abortEarly: false });
+
   if (error) {
     res.status(400);
     throw new Error(error.details.map((err) => err.message).join(', '));
@@ -34,7 +37,7 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 // @desc    Register
-// @route   POST /user/register
+// @route   POST /user/signup
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -74,4 +77,4 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, registerUser };
+export { loginUser, registerUser };
