@@ -68,7 +68,6 @@ const addMovie = asyncHandler(async (req, res) => {
 // @access  Private
 const updateMovie = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  console.log('44', id);
   const { name, yearOfRelease, plot, poster, producer, actors } = req.body;
 
   // Validate incoming data using Joi
