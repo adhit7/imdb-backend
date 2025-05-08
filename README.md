@@ -20,7 +20,8 @@ https://www.postman.com/docking-module-geoscientist-21938421/imdb/collection/ot8
 
 ## 🔗 Live Demo
 
-https://cinephile.up.railway.app/
+Frontend - https://imdb-mu-ten.vercel.app/
+Backend - https://cinephile.up.railway.app/
 
 ## ⚙️ Setup
 
