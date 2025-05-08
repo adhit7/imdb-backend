@@ -19,9 +19,17 @@ https://www.postman.com/docking-module-geoscientist-21938421/imdb/collection/ot8
 - Backend: Node.js, Express and MongoDB
 
 ## 🔗 Live Demo
+<img width="1440" alt="Screenshot 2025-05-08 at 1 36 48 PM" src="https://github.com/user-attachments/assets/75ee7e5d-15eb-400f-b28f-ed2c39ac3714" />
 
-Frontend - https://imdb-mu-ten.vercel.app/
-Backend - https://cinephile.up.railway.app/
+
+## 🌐 Live Frontend
+
+https://imdb-mu-ten.vercel.app/
+
+## 🌐 Live Backend
+
+https://cinephile.up.railway.app/
+
 
 ## ⚙️ Setup
 
