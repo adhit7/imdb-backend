@@ -2,6 +2,9 @@
 
 Cinephile is a sleek movie app that showcases popular films using data from IMDb. It features a beautiful React frontend and a Node.js backend, allowing users to explore movie posters, titles, and descriptions.
 
+## Postman Collection
+https://www.postman.com/docking-module-geoscientist-21938421/imdb/collection/ot8zbvu/imdb?action=share&creator=33652833
+
 ## 🚀 Features
 
 - Browse a curated collection of movies  
