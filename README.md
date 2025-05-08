@@ -27,4 +27,4 @@ Backend - https://cinephile.up.railway.app/
 
 1️⃣ Clone the repo:
 ```bash
-git clone https://github.com/adhit7/cinephile.git
+git clone https://github.com/adhit7/imdb-backend.git
